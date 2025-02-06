@@ -32,6 +32,8 @@ const connectConfig = () => {
     if (socketConnectState == 1) {
       socket.send(subConfig);
     } else {
+      socket.close();
+      window.location.reload();
     }
   }
 };
