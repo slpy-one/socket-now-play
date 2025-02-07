@@ -1,39 +1,63 @@
-const socket = new WebSocket("wss://lan.mama.ovh/socket");
-
 const Element = document.querySelector("#element");
 const ConnectButton = document.querySelector("#connection");
 
+const socketURI = `wss://lan.mama.ovh/socket`;
 const userID = "387465159322632202";
-
 const subConfig = `{"op":2,"d":{"subscribe_to_ids":["${userID}"]}}`;
+var payload;
 
-let socketConnectState = 1;
+var socket = new WebSocket(socketURI);
 
-socket.addEventListener("open", (e) => {
+const socketOpenFunction = (e) => {
   console.log("connected");
-});
+  buttonHandlerFunction("connect");
+};
 
-socket.addEventListener("message", (event) => {
-  let data = JSON.parse(event.data);
-  console.log(data);
-  // console.log(data.op);
+const socketMessageFunction = (e) => {
+  let data = JSON.parse(e.data);
 
-  socketConnectState = data.op;
-
-  if (data.op != 0) {
-    ConnectButton.innerHTML = "Connect";
-  } else {
-    ConnectButton.innerHTML = "Disconnect";
+  if (data.op == 1) {
+    // console.log("ready!");
+    socket.send(subConfig);
+  } else if (data.op == 0) {
+    payload = data;
   }
-});
+
+  console.log(data);
+};
+
+const socketCloseFunction = (e) => {
+  console.log("disconnected");
+};
+
+const buttonHandlerFunction = (e) => {
+  if (e == "connect") {
+    ConnectButton.innerHTML = "Disconnect";
+  } else {
+    ConnectButton.innerHTML = "Connect";
+  }
+};
+
+const socketListener = () => {
+  socket.addEventListener("open", (e) => socketOpenFunction(e));
+
+  socket.addEventListener("message", (e) => socketMessageFunction(e));
+
+  socket.addEventListener("close", (e) => socketCloseFunction(e));
+};
+
+socketListener();
 
 const connectConfig = () => {
-  if (socket.readyState == 1) {
-    if (socketConnectState == 1) {
-      socket.send(subConfig);
-    } else {
-      socket.close();
-      window.location.reload();
-    }
+  console.log(socket.readyState);
+  // socket.readyState();
+  if (socket.readyState < 2) {
+    socket.close();
+    buttonHandlerFunction("");
+  } else {
+    buttonHandlerFunction("connect");
+
+    socket = new WebSocket(socketURI);
+    socketListener();
   }
 };
