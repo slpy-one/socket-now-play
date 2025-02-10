@@ -4,6 +4,7 @@ const ConnectButton = document.querySelector("#connection");
 const socketURI = `wss://lan.mama.ovh/socket`;
 const userID = "387465159322632202";
 const subConfig = `{"op":2,"d":{"subscribe_to_ids":["${userID}"]}}`;
+var timeOut = 0;
 
 const ElementRenderer = (data) => {
   var payloadData;
@@ -18,7 +19,30 @@ const ElementRenderer = (data) => {
   console.log(payloadData.spotify);
 
   if (payloadData.spotify != null) {
+    if (timeOut != payloadData.spotify.timestamps.end) {
+      timeOut = payloadData.spotify.timestamps.end;
+    }
+
+    Element.innerHTML = `<div class="card">
+  <div>
+    <img src="${payloadData.spotify.album_art_url}" alt="album art" />
+  </div>
+  <div>
+    <h1>
+      <a href="https://open.spotify.com/track/${payloadData.spotify.track_id}" target="_blank">
+        ${payloadData.spotify.song}
+      </a>
+    </h1>
+    <h3>${payloadData.spotify.artist}</h3>
+    <p>${payloadData.spotify.album}</p>
+  </div>
+</div>
+
+`;
   } else {
+    Element.innerHTML = `<h1>
+  Nothing playing now
+</h1>`;
   }
 };
 
@@ -77,3 +101,13 @@ const connectConfig = () => {
     socketListener();
   }
 };
+
+let x = setInterval(() => {
+  let date = new Date().getTime();
+
+  if (socket.readyState < 2) {
+    if (timeOut !== 0 && date > timeOut) {
+      socket.send(subConfig);
+    }
+  }
+}, [1000]);
