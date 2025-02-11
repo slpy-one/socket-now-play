@@ -1,4 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Thai:100,200,300,regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans+JP:100,200,300,regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR:100,200,300,regular,500,600,700);
 @import url(https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css);
+
+* {
+  font-family: "IBM Plex Sans Thai", "IBM Plex Sans JP", "IBM Plex Sans KR",
+    sans-serif;
+  transition: all 0.3s;
+}
+
+body {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+button#connection {
+  position: absolute;
+  top: 1rem;
+}
 
 #element {
   width: 100%;
@@ -11,9 +30,51 @@
 }
 
 .card {
-  max-width: 22rem;
-  min-width: 18rem;
+  /* max-width: 22rem;
+  min-width: 18rem; */
+  width: 100%;
   padding: 1rem;
 
   background: var(--background);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card#nothing {
+  justify-content: center;
+}
+
+.card img {
+  width: 18rem !important;
+  aspect-ratio: 1/1;
+}
+
+.card .image {
+  min-height: 18rem !important;
+  height: 100%;
+  aspect-ratio: 1/1;
+
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.card .info {
+  width: auto !important;
+  min-height: 18rem;
+  height: 100%;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  text-align: center;
+  padding: 1rem 0;
 }
