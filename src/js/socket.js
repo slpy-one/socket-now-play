@@ -2,7 +2,6 @@ const Element = document.querySelector("#element");
 const ConnectButton = document.querySelector("#connection");
 
 const socketURI = `wss://lan.mama.ovh/socket`;
-// const userID = "387465159322632202";
 const userID = new URLSearchParams(document.location.search).get("id");
 const subConfig = `{"op":2,"d":{"subscribe_to_ids":["${userID}"]}}`;
 var timeOut = 0;
@@ -131,7 +130,36 @@ if (userID != null) {
   Element.innerHTML = `<div class="card" id="no-id">
   <h1>Welcome to Spotify Now Playing Overlay</h1>
   <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam dolorum quos, impedit et eius deserunt ad nihil tempora consequuntur rerum repellendus quibusdam facilis! Temporibus debitis pariatur quo modi sed error?
+    This project is made to help with my streaming overlay while I'm doing
+    stream. At first, I think that I gonna use Spotify Official API but I just
+    aware of rate limiting and just found websocket api in
+    <a href="https://github.com/phineas/lanyard" target="_blank">Lanyard</a>
+    which can help me of the rate limiting cause I can use the selfhosted too :D
   </p>
-</div>`;
+  <h2>
+    <u>
+      <i> For the usage </i>
+    </u>
+  </h4>
+  <p>
+    Just replace your Discord ID in the line below..
+  </p>
+  <code>
+    ${window.location}?id=[discord user id]
+  </code>
+  <p>
+    <b>**Please**</b> Make sure that you have already join our discord server because the onplaying data that gonna show on this website is coming from your discord activity that got from monitoring bot on the server.
+  </p>
+  <p>
+    <b>If you aware of your privacy</b>, I highly recommend to host this one by yourself.
+  </p>
+  <div>
+    <a href="https://discord.slpy.one" target="_blank">Discord Server</a>
+    <br>
+    <a href="https://github.com/slpy-one/socket-now-play">Github Repo</a>
+    <br>
+    <a href="https://github.com/phineas/lanyard" target="_blank">Lanyard's Github Repo</a>
+  </div>
+</div>
+`;
 }
