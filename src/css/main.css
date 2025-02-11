@@ -14,6 +14,10 @@ body {
   margin-bottom: 0 !important;
 }
 
+.hidden {
+  display: none !important;
+}
+
 button#connection {
   position: absolute;
   top: 1rem;
@@ -40,6 +44,12 @@ button#connection {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 1rem;
+}
+
+.card#no-id {
+  flex-direction: column;
+  align-items: start;
   gap: 1rem;
 }
 
