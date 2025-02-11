@@ -5,6 +5,8 @@ const socketURI = `wss://lan.mama.ovh/socket`;
 const userID = "387465159322632202";
 const subConfig = `{"op":2,"d":{"subscribe_to_ids":["${userID}"]}}`;
 var timeOut = 0;
+var timeOutStock = 0;
+var payload;
 
 const ElementRenderer = (data) => {
   var payloadData;
@@ -24,25 +26,30 @@ const ElementRenderer = (data) => {
     }
 
     Element.innerHTML = `<div class="card">
-  <div>
+  <div class="image">
     <img src="${payloadData.spotify.album_art_url}" alt="album art" />
   </div>
-  <div>
-    <h1>
-      <a href="https://open.spotify.com/track/${payloadData.spotify.track_id}" target="_blank">
-        ${payloadData.spotify.song}
-      </a>
-    </h1>
-    <h3>${payloadData.spotify.artist}</h3>
-    <p>${payloadData.spotify.album}</p>
+  <div class="info">
+    <p>
+      Now Playing
+    </p>
+    <div id="songData">
+      <h1>
+        <a href="https://open.spotify.com/track/${payloadData.spotify.track_id}" target="_blank">
+          ${payloadData.spotify.song}
+        </a>
+      </h1>
+      <h3>${payloadData.spotify.artist}</h3>
+      <p>${payloadData.spotify.album}</p>
+    </div>
   </div>
-</div>
-
-`;
+</div>`;
   } else {
-    Element.innerHTML = `<h1>
-  Nothing playing now
-</h1>`;
+    Element.innerHTML = `<div class="card" id="nothing">
+  <h1>
+    Nothing playing now
+  </h1>
+</div>`;
   }
 };
 
@@ -107,7 +114,12 @@ let x = setInterval(() => {
 
   if (socket.readyState < 2) {
     if (timeOut !== 0 && date > timeOut) {
-      socket.send(subConfig);
+      if (timeOutStock != 0 && timeOut != timeOutStock) {
+        timeOutStock = timeOut;
+        socket.send(subConfig);
+      } else if (timeOutStock == 0) {
+        timeOutStock = timeOut;
+      }
     }
   }
-}, [1000]);
+}, [500]);
