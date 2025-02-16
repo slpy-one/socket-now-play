@@ -1,7 +1,7 @@
 const Element = document.querySelector("#element");
 const ConnectButton = document.querySelector("#connection");
 
-const socketURI = `wss://lan.mama.ovh/socket`;
+const socketURI = config.socketURI;
 const userID = new URLSearchParams(document.location.search).get("id");
 const subConfig = `{"op":2,"d":{"subscribe_to_ids":["${userID}"]}}`;
 var timeOut = 0;
@@ -19,38 +19,48 @@ if (userID != null) {
     } else {
     }
 
-    // console.log(payloadData.spotify);
+    console.log(payloadData);
 
-    if (payloadData.spotify != null) {
-      if (timeOut != payloadData.spotify.timestamps.end) {
-        timeOut = payloadData.spotify.timestamps.end;
-      }
-
-      Element.innerHTML = `<div class="card">
-    <div class="image">
-      <img src="${payloadData.spotify.album_art_url}" alt="album art" />
-    </div>
-    <div class="info">
-      <p>
-        Now Playing
-      </p>
-      <div id="songData">
-        <h1>
-          <a href="https://open.spotify.com/track/${payloadData.spotify.track_id}" target="_blank">
-            ${payloadData.spotify.song}
-          </a>
-        </h1>
-        <h3>${payloadData.spotify.artist}</h3>
-        <p>${payloadData.spotify.album}</p>
-      </div>
-    </div>
-  </div>`;
+    if (payloadData === undefined) {
+      Element.innerHTML = `<div class="card" id="no-user">
+  <h1>This user still didn't joined the server</h1>
+  <p>
+    <a href="https://discord.slpy.one">Click here</a> to join the server.
+  </p>
+</div>
+`;
     } else {
-      Element.innerHTML = `<div class="card" id="nothing">
-    <h1>
-      Nothing playing now
-    </h1>
-  </div>`;
+      if (payloadData.spotify != null) {
+        if (timeOut != payloadData.spotify.timestamps.end) {
+          timeOut = payloadData.spotify.timestamps.end;
+        }
+
+        Element.innerHTML = `<div class="card">
+      <div class="image">
+        <img src="${payloadData.spotify.album_art_url}" alt="album art" />
+      </div>
+      <div class="info">
+        <p>
+          Now Playing
+        </p>
+        <div id="songData">
+          <h1>
+            <a href="https://open.spotify.com/track/${payloadData.spotify.track_id}" target="_blank">
+              ${payloadData.spotify.song}
+            </a>
+          </h1>
+          <h3>${payloadData.spotify.artist}</h3>
+          <p>${payloadData.spotify.album}</p>
+        </div>
+      </div>
+    </div>`;
+      } else {
+        Element.innerHTML = `<div class="card" id="nothing">
+      <h1>
+        Nothing playing now
+      </h1>
+    </div>`;
+      }
     }
   };
 

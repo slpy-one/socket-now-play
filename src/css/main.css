@@ -1,7 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Thai:100,200,300,regular,500,600,700);
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans+JP:100,200,300,regular,500,600,700);
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR:100,200,300,regular,500,600,700);
+
 @import url(https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css);
+@import url(/src/css/obs.css);
 
 * {
   font-family: "IBM Plex Sans Thai", "IBM Plex Sans JP", "IBM Plex Sans KR",
@@ -59,6 +61,9 @@ button#connection {
 
 .card#nothing {
   justify-content: center;
+}
+.card#no-user {
+  flex-direction: column;
 }
 
 .card img {
