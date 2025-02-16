@@ -7,7 +7,7 @@ This project is made to help with my streaming overlay while I'm doing stream. A
 Just replace your Discord ID in the line below..
 
 ```md
-http://127.0.0.1:8080/?id=[discord user id]
+http://127.0.0.1:8080/?id=<discord_user_id>
 ```
 
 **Please** Make sure that you have already join our discord server because the onplaying data that gonna show on this website is coming from your discord activity that got from monitoring bot on the server.
