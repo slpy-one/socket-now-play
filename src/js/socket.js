@@ -106,7 +106,7 @@ if (userID != null) {
 
   socketListener();
 
-  const connectConfig = () => {
+  const reconnect = () => {
     console.log(socket.readyState);
     // socket.readyState();
     if (socket.readyState < 2) {
@@ -119,6 +119,10 @@ if (userID != null) {
       socketListener();
     }
   };
+
+  ConnectButton.addEventListener("click", () => {
+    reconnect();
+  });
 
   let x = setInterval(() => {
     let date = new Date().getTime();
