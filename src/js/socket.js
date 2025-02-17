@@ -3,10 +3,22 @@ const ConnectButton = document.querySelector("#connection");
 
 const socketURI = config.socketURI;
 const userID = new URLSearchParams(document.location.search).get("id");
+const isOBS = new URLSearchParams(document.location.search).get("obs");
+const pos = new URLSearchParams(document.location.search).get("pos");
 const subConfig = `{"op":2,"d":{"subscribe_to_ids":["${userID}"]}}`;
 var timeOut = 0;
 var timeOutStock = 0;
 var payload;
+
+if (isOBS === "true") {
+  document.body.classList.toggle("obs");
+}
+if (pos === "left") {
+  document.body.classList.toggle("left");
+}
+if (pos === "right") {
+  document.body.classList.toggle("right");
+}
 
 if (userID != null) {
   const ElementRenderer = (data) => {

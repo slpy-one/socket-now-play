@@ -1,3 +1,3 @@
 - [x] added userID integrated
-- [ ] added Discord server invitation widget
-- [ ] added an html overlay on OBS -- (turn off widget)
+- [x] added Discord server invitation widget
+- [x] added an html overlay on OBS -- (turn off widget)
