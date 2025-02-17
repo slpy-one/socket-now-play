@@ -150,6 +150,14 @@ if (userID != null) {
       }
     }
   }, [500]);
+
+  let y = setInterval(() => {
+    if (socket.readyState < 2) {
+      let heartbeat = `{"op":3,"d":{"subscribe_to_ids":["${userID}"]}}`;
+
+      socket.send(heartbeat);
+    }
+  }, [29000]);
 } else {
   ConnectButton.classList.add("hidden");
 
