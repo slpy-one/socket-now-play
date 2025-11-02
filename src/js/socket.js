@@ -157,7 +157,7 @@ if (userID != null) {
 
       socket.send(heartbeat);
     }
-  }, [29000]);
+  }, [5000]);
 } else {
   ConnectButton.classList.add("hidden");
 
