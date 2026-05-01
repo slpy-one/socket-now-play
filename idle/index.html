@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>idle page | Now Playing</title>
+
+  <link rel="stylesheet" href="/src/css/idle.css" />
+  <link rel="shortcut icon" href="https://slpy.one/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="bg">
+    <div class="overlay">
+      <div id="connection-container"><button id="connection"></button></div>
+
+      <div id="element"></div>
+
+      <div id="footer">
+        &copy; 2025
+        <a href="https://slpy.one" target="_blank">slpy one team</a> All Right
+        Reserved.
+      </div>
+    </div>
+  </div>
+
+  <script src="/src/js/config.js"></script>
+  <script src="/src/js/constants.js"></script>
+  <script src="/src/js/console-warn.js"></script>
+
+  <script src="/src/js/socket.js"></script>
+  <script src="/src/js/components/idle-renderer.js"></script>
+</body>
+
+</html>
