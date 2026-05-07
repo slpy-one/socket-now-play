@@ -127,9 +127,9 @@ if (userID !== null) {
   <p>
     Just replace your Discord ID in the line below..
   </p>
-  <code>
-    ${window.location}?id=[discord user id]
-  </code>
+  <div class="code">
+    <span>${window.location}?id=</span><form id="user-update"><input type="text" name="id" placeholder="user id"><button type="submit">Submit</button></form>
+  </div>
   <p>
     <b>**Please**</b> Make sure that you have already join our discord server because the onplaying data that gonna show on this website is coming from your discord activity that got from monitoring bot on the server.
   </p>
@@ -145,4 +145,18 @@ if (userID !== null) {
   </div>
 </div>
 `;
+}
+
+if (userID === null) {
+  document
+    .querySelector("#user-update")
+    .addEventListener("submit", (e) => userSubmit(e));
+}
+
+function userSubmit(e) {
+  e.preventDefault();
+
+  if (e.target.id.value.length < 1) return;
+
+  window.location.href = `${window.location}?id=${e.target.id.value}`;
 }
