@@ -3,8 +3,7 @@
 This project is made to help with my streaming overlay while I'm doing stream. At first, I think that I gonna use Spotify Official API but I just aware of rate limiting and just found websocket api in Lanyard which can help me of the rate limiting cause I can use the selfhosted too :D
 
 ## For the usage
-
-Just replace your Discord ID in the line below..
+To run this project, you need something like `live-server` or something that can serve `HTML`, `CSS` and `JS` in your local machine. After that just replace your Discord ID in the line below..
 
 ```md
 http://127.0.0.1:8080/?id=<discord_user_id>
